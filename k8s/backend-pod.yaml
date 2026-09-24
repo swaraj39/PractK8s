@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: taskflow-backend
+
+spec:
+  containers:
+    - name: taskflow-backend
+      image: taskflow-backend:1.0
+
+      env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:postgresql://postgres:5432/taskflow
+
+        - name: SPRING_DATASOURCE_USERNAME
+          value: postgres
+
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: devpassword
+
+      ports:
+        - containerPort: 8080
