@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: taskflow-backend
+  namespace: taskflow
+  labels:
+    app: taskflow
+    component: backend
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: taskflow
+      component: backend
+  
+  template:
+    metadata:
+      labels:
+        app: taskflow
+        component: backend
+    
+    spec:
+      containers:
+        - name: backend
+          image: taskflow-backend:1.0 
+
+          ports:
+            - containerPort: 8080
+
+          envFrom: 
+            - configMapRef:
+                name: taskflow-config
+
+            - secretRef:
+                name: taskflow-db-secret

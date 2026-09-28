@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: taskflow-frontend
+  namespace: taskflow
+  labels:
+    app: taskflow
+    component: frontend
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: taskflow
+      component: frontend
+
+  template:
+    metadata:
+      labels:
+        app: taskflow
+        component: frontend
+
+    spec:
+      containers:
+        - name: frontend
+          image: taskflow-frontend:latest
+
+          ports:
+            - containerPort: 5173
